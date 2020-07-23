@@ -1,6 +1,5 @@
 """Greeting Flask app."""
 
-from random import choice
 
 from flask import Flask, request
 
@@ -18,7 +17,17 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-    return "<!doctype html><html>Hi! This is the home page.</html>"
+    return """
+    <!doctype html>
+    <html>
+      <head>
+        <title>Start Here</title>
+      </head>
+      <body>
+        <a href="/hello">Let's goooo!</a>
+      </body>
+    </html>
+    """
 
 
 @app.route('/hello')
@@ -33,8 +42,24 @@ def say_hello():
       </head>
       <body>
         <h1>Hi There!</h1>
-        <form action="/greet">
-          What's your name? <input type="text" name="person">
+        <form action="/greet" method='GET'>
+          What's your name? <input type="text" name="person"><br>
+          <br>
+          What compliment would you like?<br>
+          <input type="radio" name="compliment" value="awesome">Awesome<br>
+          <input type="radio" name="compliment" value="terrific">Terrific<br>
+          <input type="radio" name="compliment" value="fantastic">Fantastic<br>
+          <input type="radio" name="compliment" value="neato">Neato<br>
+          <input type="radio" name="compliment" value="fantabulous">Fantabulous<br>
+          <input type="radio" name="compliment" value="wowza">Wowza<br>
+          <input type="radio" name="compliment" value="oh-so-not-meh">Oh-so-not-meh<br>
+          <input type="radio" name="compliment" value="brilliant">Brilliant<br>
+          <input type="radio" name="compliment" value="ducky">Ducky<br>
+          <input type="radio" name="compliment" value="coolio">Coolio<br>
+          <input type="radio" name="compliment" value="incredible">Incredible<br>
+          <input type="radio" name="compliment" value="wonderful">Wonderful<br>
+          <input type="radio" name="compliment" value="smashing">Smashing<br>
+          <input type="radio" name="compliment" value="lovely">Lovely<br>
           <input type="submit" value="Submit">
         </form>
       </body>
@@ -48,19 +73,21 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    compliment = request.args.get("compliment")
 
-    return """
+    return f"""
     <!doctype html>
     <html>
       <head>
         <title>A Compliment</title>
       </head>
       <body>
-        Hi, {}! I think you're {}!
+        <form>
+          
+        Hi, {player}! I think you're {compliment}!
       </body>
     </html>
-    """.format(player, compliment)
+    """
 
 
 if __name__ == '__main__':
