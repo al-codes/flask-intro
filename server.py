@@ -24,7 +24,7 @@ def start_here():
         <title>Start Here</title>
       </head>
       <body>
-        <a href="/hello">Let's goooo!</a>
+        <a href="/hello"><h1>Let's goooo!</h1></a>
       </body>
     </html>
     """
